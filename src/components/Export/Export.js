@@ -14,7 +14,7 @@ const flattenObject = (obj, parentKey = '') => {
 
 export const exportToExcel = (data) => {
   // Flatten the deep objects
-  const flattenedData = data.map((el) => flattenObject(el))
+  const flattenedData = data?.map((el) => flattenObject(el))
 
   const wb = XLSX.utils.book_new()
   const ws = XLSX.utils.json_to_sheet(flattenedData)

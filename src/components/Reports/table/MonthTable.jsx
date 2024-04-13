@@ -43,6 +43,7 @@ const columns = [
 const MonthTable = ({ selectedGroup }) => {
   const { year, month, day } = useSelector((s) => s.date)
   const [data, setData] = useState([])
+  const [dataForExport, setDataForExport] = useState([])
   const [page, setPage] = useState(1)
   const dispatch = useDispatch()
   const [isLoading, setIsLoading] = useState(false)
@@ -61,6 +62,18 @@ const MonthTable = ({ selectedGroup }) => {
       .finally(() => setIsLoading(false))
   }, [selectedGroup, page, year, month, day])
 
+  useEffect(() => {
+    axiosInstance
+      .get(
+        `/newreport/month?${
+          year && month && `time=${year + '-' + month}&`
+        }kindergarten_id=2&limit=100000&page=${page}${
+          selectedGroup ? `&group_id=${selectedGroup}` : ''
+        }`,
+      )
+      .then((res) => setDataForExport(res.data.data))
+  }, [selectedGroup, page, year, month, day])
+
   return (
     <Table
       loading={isLoading}
@@ -76,9 +89,9 @@ const MonthTable = ({ selectedGroup }) => {
       }}
       pagination={false}
       footer={() => (
-        <div className='flex items-center justify-between'>
+        <div className="flex items-center justify-between">
           <button
-            onClick={() => exportToExcel(data.data)}
+            onClick={() => exportToExcel(dataForExport)}
             className="bg-[#007bff] text-white border-none p-3 rounded-sm cursor-pointer hover:bg-[#0056b3]"
           >
             Экспорт
