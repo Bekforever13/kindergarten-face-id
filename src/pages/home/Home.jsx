@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import Month from '../../components/month/Month'
 import { GrLinkNext, GrLinkPrevious } from 'react-icons/gr'
 import { useDispatch, useSelector } from 'react-redux'

@@ -1,12 +1,15 @@
-import MonthTable from './table/MonthTable'
-import ReportGroups from './groups/ReportGroups'
-import { useState } from 'react'
-import DayTable from './table/DayTable'
+import MonthTable from "./table/MonthTable";
+import ReportGroups from "./groups/ReportGroups";
+import DayTable from "./table/DayTable";
 
-const Reports = ({ isMonthTable, setIsMonthTable }) => {
-  const [selectedGroup, setSelectedGroup] = useState(0)
+const Reports = ({
+  isMonthTable,
+  setIsMonthTable,
+  selectedGroup,
+  setSelectedGroup,
+}) => {
   return (
-    <div className="flex items-start gap-20">
+    <div className='flex items-start gap-20'>
       <ReportGroups
         selectedGroup={selectedGroup}
         setSelectedGroup={setSelectedGroup}
@@ -17,7 +20,7 @@ const Reports = ({ isMonthTable, setIsMonthTable }) => {
         <DayTable selectedGroup={selectedGroup} />
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Reports
+export default Reports;
